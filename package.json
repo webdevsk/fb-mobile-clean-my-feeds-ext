@@ -1,0 +1,23 @@
+{
+  "name": "fb-mobile-clean-my-feeds-ext",
+  "version": "1.0.4",
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "wxt": "^0.20.6",
+    "biome": "^0.3.3",
+    "@wxt-dev/auto-icons": "^1.1.0"
+  },
+  "description": "Hides Suggested and Unwanted posts from Facebook Mobile feed. Get a clean Newsfeeds with posts only from your friends, pages and groups you follow.",
+  "private": true,
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare"
+  },
+  "type": "module"
+}
