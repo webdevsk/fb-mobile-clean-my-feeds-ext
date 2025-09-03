@@ -1,3 +1,4 @@
+// window.localStorage instead of chrome.storage as going Async may break stuff
 import { devMode } from "@/config"
 
 type FiltersValue = string[]
@@ -35,7 +36,8 @@ export class WhitelistedFiltersStorage {
 	}
 
 	constructor() {
-		this.cache = GM_getValue(this.storageKey, this.defaultValue)
+		const stored = window.localStorage.getItem(this.storageKey)
+		this.cache = stored ? JSON.parse(stored) : this.defaultValue
 	}
 
 	/**
@@ -69,7 +71,7 @@ export class WhitelistedFiltersStorage {
 			return
 		}
 		if (devMode) console.log("Set new filters", value)
-		GM_setValue(this.storageKey, value)
+		window.localStorage.setItem(this.storageKey, JSON.stringify(value))
 		this.cache = value
 		this.notifyListeners(value)
 	}
