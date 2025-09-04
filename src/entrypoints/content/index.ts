@@ -10,6 +10,7 @@ import { SettingsMenuInjector } from "@/lib/settings-menu-injector"
 import { updateThemeConfigWhenPossible } from "@/lib/updateThemeConfigWhenPossible"
 import { injectConsole } from "@/utils/inject-console"
 import { bodyId, devMode } from "../../config"
+import { injectPwaManifest } from "@/lib/inject-pwa-manifest"
 
 export default defineContentScript({
 	matches: ["*://*.facebook.com/*"],
@@ -20,7 +21,7 @@ export default defineContentScript({
 			console.error("ID 'app-body' not found.")
 			return
 		}
-
+		injectPwaManifest()
 		injectConsole("FB Mobile - Clean my feeds (Extension)")
 
 		onReadyForScripting(() => {

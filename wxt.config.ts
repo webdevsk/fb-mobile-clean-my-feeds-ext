@@ -23,7 +23,7 @@ export default defineConfig({
 		},
 		web_accessible_resources: [
 			{
-				resources: ["/runtime.css"],
+				resources: ["/runtime.css", "pwa-manifest.json"],
 				matches: ["*://*.facebook.com/*"],
 			},
 		],

@@ -9,6 +9,8 @@ export const getCurrentPage = (): MainPagesBasedOnNavBarButtons | "unknown" => {
 		(document
 			.querySelector(`${navBarSelector} > [aria-selected="true"]`)
 			?.getAttribute("aria-label")
-			?.split(",")[0] as MainPagesBasedOnNavBarButtons) ?? "unknown"
+			?.split(",")
+			?.at(0)
+			?.trim() as MainPagesBasedOnNavBarButtons) ?? "unknown"
 	)
 }

@@ -1,0 +1,68 @@
+{
+    "short_name": "Facebook",
+    "name": "Facebook",
+    "start_url": "https:\/\/www.facebook.com\/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#242526",
+    "icons": [
+        {
+            "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v4\/y0\/r\/eFZD1KABzRA.png?_nc_eui2=AeH99F0FU9k24LobcTNAJQs-HzWgXDe6takfNaBcN7q1qaAfRov7zhlxeJ_kfwZMbCjr6t1vuM8oi5uvtREYUrNw",
+            "sizes": "192x192",
+            "type": "image\/png"
+        },
+        {
+            "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v4\/yd\/r\/DeNyZD1Vj3q.png?_nc_eui2=AeFNaXOopjLQ-mtEa3otgscLum5IFe8P9dS6bkgV7w_11Kv-iKrI8DcPPcCUma3iYx36S5dZuXx1JX4A-Q_u6jWK",
+            "sizes": "512x512",
+            "type": "image\/png"
+        }
+    ],
+    "launch_handler": {
+        "client_mode": "navigate-existing"
+    },
+    "widgets": [
+        {
+            "name": "Facebook",
+            "description": "Facebook",
+            "short_name": "Facebook",
+            "tag": "fb_widget",
+            "type": "application\/json",
+            "update": 100,
+            "icons": [
+                {
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v4\/y0\/r\/eFZD1KABzRA.png?_nc_eui2=AeH99F0FU9k24LobcTNAJQs-HzWgXDe6takfNaBcN7q1qaAfRov7zhlxeJ_kfwZMbCjr6t1vuM8oi5uvtREYUrNw",
+                    "sizes": "192x192"
+                }
+            ],
+            "screenshots": [
+                {
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v4\/yT\/r\/mqlhqxHpT-X.png?_nc_eui2=AeEkpFStLbyzyjoOGKC8YnQJKDLACD4Ptr8oMsAIPg-2vy2uleGmvflmJvCqaPiQhbZ8PCUn4w1zizizvRGQ7Njl",
+                    "sizes": "464x478",
+                    "label": "Widget Screenshot"
+                }
+            ],
+            "template": "dummy",
+            "data": "\/dummy.json",
+            "ms_ac_template": "\/dummy.json"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "play",
+            "id": "com.facebook.katana"
+        },
+        {
+            "platform": "play",
+            "id": "com.facebook.lite"
+        },
+        {
+            "platform": "play",
+            "id": "com.facebook.orca"
+        },
+        {
+            "platform": "play",
+            "id": "com.facebook.mlite"
+        }
+    ],
+    "prefer_related_applications": false
+}

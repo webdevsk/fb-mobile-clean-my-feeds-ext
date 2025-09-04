@@ -77,9 +77,20 @@ export class MenuButtonsInjector {
 	 * Injects the custom buttons into the DOM if they don't already exist
 	 */
 	private injectButtons(): void {
-		const titleBarEle = document.querySelector(".filler")?.nextElementSibling
-		if (!titleBarEle || !(titleBarEle instanceof HTMLElement)) {
-			if (devMode) console.error("Title bar element not found")
+		const fillerEle = document.querySelector(".filler")
+		const titleBarEle = fillerEle?.nextElementSibling
+		if (
+			!fillerEle ||
+			!titleBarEle ||
+			!(titleBarEle instanceof HTMLElement) ||
+			titleBarEle.matches("[role*='tablist']")
+		) {
+			if (devMode)
+				console.error(
+					"Filler or Title bar element not found",
+					fillerEle,
+					titleBarEle
+				)
 			return
 		}
 
