@@ -23,7 +23,7 @@ export default defineConfig({
 		},
 		web_accessible_resources: [
 			{
-				resources: ["/content.css"],
+				resources: ["/runtime.css"],
 				matches: ["*://*.facebook.com/*"],
 			},
 		],

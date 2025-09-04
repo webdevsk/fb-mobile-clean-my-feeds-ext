@@ -16,21 +16,15 @@ export const purgeElement = ({
 	sponsoredFilters: string[]
 }) => {
 	element.tabIndex = -1
-
 	element.dataset.purged = "true"
 	element.dataset.reason = reason
 
 	// Sponsored posts get removed in an "out of order" fashion automatically.
 	// Having placeholder inside them results in a  scroll jump
 	if (showPlaceholder && !sponsoredFilters.includes(reason)) {
+		element.dataset.actualHeight = "32"
 		element.classList.add(theme.bgClassName)
-		console.log("window.purgeCounter", window.purgeCounter)
-		if (window.purgeCounter < 10) {
-			element.dataset.actualHeight = "32"
-			element.style.height = "2rem"
-		} else {
-			window.purgeCounter = 0
-		}
+		element.style.height = "2rem"
 
 		const overlay = document.createElement("article")
 		overlay.className = "placeholder"

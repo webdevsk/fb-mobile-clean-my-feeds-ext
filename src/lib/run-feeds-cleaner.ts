@@ -4,21 +4,15 @@ import {
 	postContainerSelector,
 } from "@/config"
 import {
-	filtersDatabase,
 	filterTitlePerKeywordIndex,
+	filtersDatabase,
 } from "@/data/filters-database"
 import { keywordsPerLanguage } from "@/data/keywords-per-language"
 import { BlockCounter } from "@/lib/block-counter"
 import { getOwnLangFilters } from "./get-own-language-filters"
 import { purgeElement } from "./purge-element"
+import { Spinner } from "./spinner"
 import { WhitelistedFiltersStorage } from "./whitelisted-filters-storage"
-
-declare global {
-	interface Window {
-		purgeCounter: number
-	}
-}
-window.purgeCounter = 0
 
 export const runFeedsCleaner = (): (() => void) => {
 	// this version of fb does not update navigator.lang on language change
@@ -60,22 +54,10 @@ export const runFeedsCleaner = (): (() => void) => {
 
 	const checkElement = (element: HTMLElement) => {
 		// Handled already
-		if (element.dataset.purged === "true") {
-			console.log("Element already purged", element)
-		}
 		if (element.dataset.purged === "true") return
 		let flagged: boolean = false
 		let matchedfilter: string
 		let reason: string
-
-		// const heading = element.querySelector(
-		// 	`:scope > :not(:is(
-		// 	${Array.from({ length: 2 })
-		// 		.map((_, i) => `[data-actual-height="${i + 1}"]`)
-		// 		.join(",")}, [data-actual-height="32"]))`
-		// )
-
-		// console.log("heading :", heading)
 
 		for (const span of element.querySelectorAll(
 			possibleTargetsSelectorInPost
@@ -98,11 +80,9 @@ export const runFeedsCleaner = (): (() => void) => {
 
 		if (!flagged) {
 			BlockCounter.getInstance().increaseWhite()
-			window.purgeCounter = 0
 			return
 		}
 		BlockCounter.getInstance().increaseBlack()
-		window.purgeCounter++
 
 		purgeElement({
 			element,
@@ -129,7 +109,7 @@ export const runFeedsCleaner = (): (() => void) => {
 			if (mutation.addedNodes.length === 0) continue
 			if (devMode)
 				console.log("Checking posts count:", mutation.addedNodes.length)
-			// Spinner.getInstance().show()
+			Spinner.getInstance().show()
 
 			for (const element of mutation.addedNodes) {
 				if (
@@ -142,7 +122,7 @@ export const runFeedsCleaner = (): (() => void) => {
 
 				checkElement(element)
 			}
-			// Spinner.getInstance().hide()
+			Spinner.getInstance().hide()
 		}
 	})
 
