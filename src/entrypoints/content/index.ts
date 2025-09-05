@@ -11,6 +11,7 @@ import { updateThemeConfigWhenPossible } from "@/lib/updateThemeConfigWhenPossib
 import { injectConsole } from "@/utils/inject-console"
 import { bodyId, devMode } from "../../config"
 import { injectPwaManifest } from "@/lib/inject-pwa-manifest"
+import { removeAppInstallPrompt } from "@/lib/remove-app-install-prompt"
 
 export default defineContentScript({
 	matches: ["*://*.facebook.com/*"],
@@ -27,11 +28,9 @@ export default defineContentScript({
 		onReadyForScripting(() => {
 			console.log("Ready for scripting")
 			// const styleNode = GM_addStyle(browser.runtime.getURL("content-scripts/<name>.css"))
-			const styleNode = document.createElement("link")
-			styleNode.rel = "stylesheet"
-			styleNode.type = "text/css"
-			styleNode.href = browser.runtime.getURL("/runtime.css")
-			;(document.head || document.documentElement).appendChild(styleNode)
+
+			// We don't want to remove the node from other pages as they may contain Menus
+			removeAppInstallPrompt()
 
 			// Store all abort functions
 			const aborts: Array<() => void> = [
@@ -59,7 +58,6 @@ export default defineContentScript({
 
 			return () => {
 				console.log("Not Ready for scripting")
-				styleNode.remove()
 				// Cleanup code like removing dom nodes and destroying event listeners
 				aborts.forEach(abort => abort?.())
 				aborts.length = 0

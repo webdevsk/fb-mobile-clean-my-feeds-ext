@@ -1,7 +1,6 @@
 {
     "short_name": "Facebook",
     "name": "Facebook",
-    "start_url": "https:\/\/www.facebook.com\/",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#242526",

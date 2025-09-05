@@ -1,7 +1,7 @@
 /**
  * Enables verbose console logging and counter
  */
-export const devMode = true
+export const devMode = false
 /**
  * bodyId is the id of the body element. Comes with HTML. It will surely be there
  */
@@ -48,7 +48,7 @@ export type MainPagesBasedOnNavBarButtons =
 /**
  * pages to run the script on
  */
-export const runScriptOn: MainPagesBasedOnNavBarButtons[] = ["feed", "videos"]
+export const runScriptOn: MainPagesBasedOnNavBarButtons[] = ["feed"]
 /**
  * showPlaceholder is whether to show placeholder or not
  */

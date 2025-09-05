@@ -7,7 +7,7 @@
     "biome": "^0.3.3",
     "@wxt-dev/auto-icons": "^1.1.0"
   },
-  "description": "Hides Suggested and Unwanted posts from Facebook Mobile feed. Get a clean Newsfeeds with posts only from your friends, pages and groups you follow.",
+  "description": "Hides unwanted posts from Facebook feed on mobile. Get a clean Newsfeed with posts only from friends, pages and groups you follow.",
   "private": true,
   "scripts": {
     "dev": "wxt",
