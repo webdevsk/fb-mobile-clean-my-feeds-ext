@@ -1,12 +1,11 @@
 import { defineConfig } from "wxt"
-import { description, version } from "./package.json"
+import { description } from "./package.json"
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-	manifest: {
+	manifest:({browser}) =>  ({
 		name: "FB Mobile - Clean my feeds",
 		description,
-		version,
 		icons: {
 			"16": "icons/16.png",
 			"32": "icons/32.png",
@@ -27,7 +26,20 @@ export default defineConfig({
 				matches: ["*://*.facebook.com/*"],
 			},
 		],
-	},
+		...(browser === "firefox" ? {
+			"browser_specific_settings": {
+				"gecko_android": {
+					"strict_min_version": "113.0",
+					"id": "92a2df5ed2510a2bfa4131c48c63c5d2de0ce475@webdevsk-addon"
+				},
+				"gecko": {
+					"strict_min_version": "113.0",
+					"id": "92a2df5ed2510a2bfa4131c48c63c5d2de0ce475@webdevsk-addon"
+				},
+			}
+		} : {})
+	}),
 	srcDir: "src",
 	modules: ["@wxt-dev/auto-icons"],
+	manifestVersion: 3,
 })
