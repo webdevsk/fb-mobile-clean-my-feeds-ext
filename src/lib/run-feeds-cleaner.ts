@@ -9,7 +9,7 @@ import {
 } from "@/data/filters-database"
 import { keywordsPerLanguage } from "@/data/keywords-per-language"
 import { BlockCounter } from "@/lib/block-counter"
-import { getOwnLangFilters } from "./get-own-language-filters"
+import { getGlobalFilters, getOwnLangFilters } from "./get-own-language-filters"
 import { purgeElement } from "./purge-element"
 import { Spinner } from "./spinner"
 import { WhitelistedFiltersStorage } from "./whitelisted-filters-storage"
@@ -33,11 +33,15 @@ export const runFeedsCleaner = (): (() => void) => {
 					.flatMap(filter =>
 						whitelistedFilters.includes(filter)
 							? []
-							: getOwnLangFilters(filtersDatabase[filter].keywordsDB)
+							: [
+									...getGlobalFilters(filtersDatabase[filter].keywordsDB),
+									...getOwnLangFilters(filtersDatabase[filter].keywordsDB),
+								]
 					)
 					.filter(d => d)
 			)
 		)
+		if (devMode) console.log("Active filters", activeFilters)
 	}
 	// Set active filters initially
 	setActiveFilters(whitelistedFilters)
@@ -48,9 +52,9 @@ export const runFeedsCleaner = (): (() => void) => {
 	const sponsoredFilters = getOwnLangFilters(
 		filtersDatabase.sponsored.keywordsDB
 	)
-	const placeHolderMessage = getOwnLangFilters(
+	const [placeHolderMessage] = getGlobalFilters(
 		keywordsPerLanguage.placeholderMessage
-	)[0]
+	)
 
 	const checkElement = (element: HTMLElement) => {
 		// Handled already
@@ -58,11 +62,13 @@ export const runFeedsCleaner = (): (() => void) => {
 		let flagged: boolean = false
 		let matchedfilter: string
 		let reason: string
+		const possibleTargetsContain: (string | null)[] = []
 
 		for (const span of element.querySelectorAll(
 			possibleTargetsSelectorInPost
 		)) {
 			let done: boolean = false
+			if (devMode) possibleTargetsContain.push(span.textContent)
 			for (const filter of activeFilters) {
 				if (!span.textContent?.includes(filter)) continue
 				flagged = true
@@ -77,6 +83,9 @@ export const runFeedsCleaner = (): (() => void) => {
 			}
 			if (done) break
 		}
+
+		if (devMode)
+			console.log(element, "Possible targets contain:", possibleTargetsContain)
 
 		if (!flagged) {
 			BlockCounter.getInstance().increaseWhite()
