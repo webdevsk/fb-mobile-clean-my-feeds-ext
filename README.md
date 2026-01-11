@@ -3,7 +3,8 @@
 <div align="center">
         <img width="100" height="100" src="./src/assets/icon.png" alt="FB Mobile - Clean my feeds Extension icon"/>
 
-## FB Mobile - Clean my feeds (Browser Extension)
+<h2>FB Mobile - Clean my feeds (Browser Extension)</h2>
+
 [![Chrome web store link](src/assets/chromewebstore-badge.png)][chromewebstore]
 
 [![Firefox addon link](src/assets/get-the-addon.webp)][addonsmozillaorg]
@@ -17,13 +18,6 @@
 <summary>Table of contents</summary>
 
 
-- [FB Mobile - Clean my feeds (Browser Extension)](#fb-mobile---clean-my-feeds-browser-extension)
-  - [Features](#features)
-  - [How to use](#how-to-use)
-    - [Install it as a web app (Recommended)](#install-it-as-a-web-app-recommended)
-    - [Browser/Extension Alternatives](#browserextension-alternatives)
-  - [Changelog](#changelog)
-  - [Known issues](#known-issues)
 - [How to build](#how-to-build)
   - [Prerequisites](#prerequisites)
   - [Install dependencies](#install-dependencies)
@@ -57,7 +51,7 @@ An added benefit of converting it into an extension is that the website can now 
 
 ### How to use
 
-1. Install a browser that supports Extensions, such as `Quetta Browser` on [Android](https://play.google.com/store/apps/details?id=net.quetta.browser) or [IOS](https://apps.apple.com/us/app/quetta-ad-free-video-browser/id6504077999), Mises or Lemur. Kiwi Browser is not recommended as it's abandoned and out of date.
+1. Install a browser that supports Extensions, such as `Quetta Browser` on [Android](https://play.google.com/store/apps/details?id=net.quetta.browser) or [IOS](https://apps.apple.com/us/app/quetta-ad-free-video-browser/id6504077999), Mises, Lemur or any Firefox based browsers. Kiwi Browser is not recommended as it's abandoned and out of date.
 1. Launch your preferred browser then head to Chrome Web Store and search for "FB Mobile - Clean my feeds". Alternatively, you can follow this link: [https://chromewebstore.google.com/detail/fb-mobile-clean-my-feeds/oipbhmdodiafhpfglkeomlldnbahdlfd][chromewebstore]
 1. **(Optional)** Install [uBlock Origin](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm) extension.
    - Not required for this extension but will improve your overall browsing experience by a mile.installation: [GreasyFork](https://greasyfork.org/en/scripts/479868-fb-mobile-clean-my-feeds)
