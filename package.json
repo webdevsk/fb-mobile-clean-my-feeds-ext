@@ -1,6 +1,6 @@
 {
   "name": "fb-mobile-clean-my-feeds-ext",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "devDependencies": {
     "typescript": "^5.9.2",
     "wxt": "^0.20.6",
