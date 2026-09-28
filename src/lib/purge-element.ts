@@ -1,18 +1,17 @@
 import { showPlaceholder, theme } from "@/config"
+import { placeholderMessage } from "@/data/keywords-per-language"
 
 export const purgeElement = ({
 	element,
 	filter,
 	reason,
 	author,
-	placeHolderMessage,
 	sponsoredFilters,
 }: {
 	element: HTMLElement
 	filter: string
 	reason: string
 	author: string
-	placeHolderMessage: string
 	sponsoredFilters: string[]
 }) => {
 	element.tabIndex = -1
@@ -28,7 +27,7 @@ export const purgeElement = ({
 
 		const overlay = document.createElement("article")
 		overlay.className = "placeholder"
-		overlay.innerHTML = `<p style="color: ${theme.textColor}">${placeHolderMessage}: ${author} (${filter})</p>`
+		overlay.innerHTML = `<p style="color: ${theme.textColor}">${placeholderMessage.en}: ${author} (${filter})</p>`
 		element.appendChild(overlay)
 	} else {
 		// Hide elements by resizing to 0px

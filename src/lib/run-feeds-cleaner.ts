@@ -7,7 +7,7 @@ import {
 	filterTitlePerKeywordIndex,
 	filtersDatabase,
 } from "@/data/filters-database"
-import { keywordsPerLanguage } from "@/data/keywords-per-language"
+import { Keyword } from "@/data/keywords-per-language"
 import { BlockCounter } from "@/lib/block-counter"
 import { getGlobalFilters, getOwnLangFilters } from "./get-own-language-filters"
 import { purgeElement } from "./purge-element"
@@ -24,11 +24,11 @@ export const runFeedsCleaner = (): (() => void) => {
 
 	const allFilters = Object.keys(filtersDatabase)
 	const whitelistedFilters = whitelistedStorageInstance.get()
-	const activeFilters: string[] = []
+	const activeFilters: Keyword[] = []
 	const setActiveFilters = (whitelistedFilters: string[]) => {
 		activeFilters.length = 0
 		activeFilters.push(
-			...new Set(
+			...new Set<Keyword>(
 				allFilters
 					.flatMap(filter =>
 						whitelistedFilters.includes(filter)
@@ -38,6 +38,7 @@ export const runFeedsCleaner = (): (() => void) => {
 									...getOwnLangFilters(filtersDatabase[filter].keywordsDB),
 								]
 					)
+					.flat()
 					.filter(d => d)
 			)
 		)
@@ -51,10 +52,7 @@ export const runFeedsCleaner = (): (() => void) => {
 
 	const sponsoredFilters = getOwnLangFilters(
 		filtersDatabase.sponsored.keywordsDB
-	)
-	const [placeHolderMessage] = getGlobalFilters(
-		keywordsPerLanguage.placeholderMessage
-	)
+	).map(k => k instanceof RegExp ? k.toString() : k)
 
 	const checkElement = (element: HTMLElement) => {
 		// Handled already
@@ -70,13 +68,13 @@ export const runFeedsCleaner = (): (() => void) => {
 			let done: boolean = false
 			if (devMode) possibleTargetsContain.push(span.textContent)
 			for (const filter of activeFilters) {
-				if (!span.textContent?.includes(filter)) continue
+				if (filter instanceof RegExp ? !span.textContent?.match(filter) : !span.textContent?.includes(filter)) continue
 				flagged = true
-				matchedfilter = filterTitlePerKeywordIndex.get(filter)!
+				matchedfilter = filterTitlePerKeywordIndex.get(filter instanceof RegExp ? filter.toString() : filter)! 
 				reason = span.innerHTML
 				if (devMode)
 					console.log(
-						`Flagged post containing: "${reason}" with filter: "${matchedfilter}"`
+						`Flagged post containing: "${reason}" with filter: ${matchedfilter}`
 					)
 				done = true
 				break
@@ -97,7 +95,6 @@ export const runFeedsCleaner = (): (() => void) => {
 			element,
 			reason: reason!,
 			author: element.querySelector("span.f2")?.innerHTML ?? "",
-			placeHolderMessage,
 			sponsoredFilters,
 			filter: matchedfilter!,
 		})

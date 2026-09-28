@@ -43,8 +43,9 @@ export const filtersDatabase: Record<string, FiltersDatabaseItem> = {
 	},
 }
 
+// RegExp values are normalized to string to be used as keys in the map.
 export const filterTitlePerKeywordIndex = new Map<string, string>(
 	Object.entries(filtersDatabase).flatMap(([_category, { title, keywordsDB }]) =>
-		Object.values(keywordsDB).flatMap((keyword) => Array.isArray(keyword) ? keyword.map(k => [k, title]) : [[keyword, title]])
+		Object.values(keywordsDB).flatMap((keyword) => Array.isArray(keyword) ? keyword.map(k => [k instanceof RegExp ? k.toString() : k, title]) : [[keyword instanceof RegExp ? keyword.toString() : keyword, title]])
 	)
 )

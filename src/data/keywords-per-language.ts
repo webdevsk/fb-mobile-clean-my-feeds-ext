@@ -1,24 +1,25 @@
+export type Keyword = string | RegExp
 export type KeywordsPerLanguageItem = Record<
 	NavigatorLanguage["languages"][number],
-	string | string[]
+	Keyword | Keyword[]
 >
-type KeywordsPerLanguage = Record<string, KeywordsPerLanguageItem>
+type KeywordsPerLanguage =  Record<string, KeywordsPerLanguageItem>
 
 // You can add more languages here. Language code must match the output of navigator.languages
 // You can get the output of navigator.languages by opening the console and typing navigator.languages
+export const placeholderMessage = {
+	"en-US": "Removed",
+	en: "Removed",
+	bn: "বাতিল",
+}
 export const keywordsPerLanguage: KeywordsPerLanguage = {
-	placeholderMessage: {
-		"en-US": "Removed",
-		en: "Removed",
-		bn: "বাতিল",
-	},
 	suggested: {
 		"en-US": "Suggested",
 		en: "Suggested",
 		bn: "আপনার জন্য প্রস্তাবিত",
 	},
 	sponsored: {
-		"en-US": "Sponsored",
+		"en-US": ["Sponsored", /^Ad$/],
 		en: "Sponsored",
 		bn: "স্পনসর্ড",
 	},
