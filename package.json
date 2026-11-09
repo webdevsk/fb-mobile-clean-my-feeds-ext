@@ -1,24 +1,24 @@
 {
-  "name": "fb-mobile-clean-my-feeds-ext",
-  "version": "1.0.5",
-  "devDependencies": {
-    "typescript": "^5.9.2",
-    "wxt": "^0.20.6",
-    "biome": "^0.3.3",
-    "@wxt-dev/auto-icons": "^1.1.0"
-  },
-  "description": "Hides unwanted posts from Facebook feed on mobile. Get a clean Newsfeed with posts only from friends, pages and groups you follow.",
-  "private": true,
-  "scripts": {
-    "dev": "wxt",
-    "dev:firefox": "wxt -b firefox",
-    "build": "wxt build",
-    "build:firefox": "wxt build -b firefox",
-    "zip": "wxt zip",
-    "zip:firefox": "wxt zip -b firefox",
-    "compile": "tsc --noEmit",
-    "lint": "tsc --noEmit",
-    "postinstall": "wxt prepare"
-  },
-  "type": "module"
+	"name": "clean-my-feeds-for-facebook-mobile",
+	"version": "2.0.0",
+	"devDependencies": {
+		"typescript": "^5.9.2",
+		"wxt": "^0.20.6",
+		"biome": "^0.3.3",
+		"@wxt-dev/auto-icons": "^1.1.0"
+	},
+	"description": "Hides unwanted posts from Facebook feed on mobile. Get a clean Newsfeed with posts only from friends, pages and groups you follow.",
+	"private": true,
+	"scripts": {
+		"dev": "wxt",
+		"dev:firefox": "wxt -b firefox",
+		"build": "wxt build",
+		"build:firefox": "wxt build -b firefox",
+		"zip": "wxt zip",
+		"zip:firefox": "wxt zip -b firefox",
+		"compile": "tsc --noEmit",
+		"lint": "tsc --noEmit",
+		"postinstall": "wxt prepare"
+	},
+	"type": "module"
 }

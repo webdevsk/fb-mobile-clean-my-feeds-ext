@@ -19,7 +19,7 @@ export const filtersDatabase: Record<string, FiltersDatabaseItem> = {
 	},
 	sponsored: {
 		title: "Sponsored",
-		description: "Removes annoying ads",
+		description: "Hides sponsored and promotional posts",
 		icon: "󱠑",
 		keywordsDB: keywordsPerLanguage.sponsored,
 	},

@@ -1,9 +1,9 @@
 <br />
 
 <div align="center">
-        <img width="100" height="100" src="./src/assets/icon.png" alt="FB Mobile - Clean my feeds Extension icon"/>
+        <img width="100" height="100" src="./src/assets/icon.png" alt="Clean My Feeds for Facebook Mobile Extension icon"/>
 
-<h2>FB Mobile - Clean my feeds (Browser Extension)</h2>
+<h2>Clean My Feeds for Facebook Mobile</h2>
 
 [![Chrome web store link](src/assets/chromewebstore-badge.png)][chromewebstore]
 
@@ -52,7 +52,7 @@ An added benefit of converting it into an extension is that the website can now 
 ### How to use
 
 1. Install a browser that supports Extensions, such as `Quetta Browser` on [Android](https://play.google.com/store/apps/details?id=net.quetta.browser) or [IOS](https://apps.apple.com/us/app/quetta-ad-free-video-browser/id6504077999), Mises, Lemur or any Firefox based browsers. Kiwi Browser is not recommended as it's abandoned and out of date.
-1. Launch your preferred browser then head to Chrome Web Store and search for "FB Mobile - Clean my feeds". Alternatively, you can follow this link: [https://chromewebstore.google.com/detail/fb-mobile-clean-my-feeds/oipbhmdodiafhpfglkeomlldnbahdlfd][chromewebstore]
+1. Launch your preferred browser then head to Chrome Web Store and search for "Clean My Feeds for Facebook Mobile". Alternatively, you can follow this link: [https://chromewebstore.google.com/detail/fb-mobile-clean-my-feeds/oipbhmdodiafhpfglkeomlldnbahdlfd][chromewebstore]
 1. **(Optional)** Install [uBlock Origin](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm) extension.
    - Not required for this extension but will improve your overall browsing experience by a mile.installation: [GreasyFork](https://greasyfork.org/en/scripts/479868-fb-mobile-clean-my-feeds)
 1. Browse https://m.facebook.com/ without all the trash.

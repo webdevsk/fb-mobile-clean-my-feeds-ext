@@ -1,4 +1,5 @@
 import { devMode, theme } from "@/config"
+import { feedsIconSvg, settingsIconSvg } from "@/assets/svg-icons"
 
 type DestroyFunction = () => void
 
@@ -49,25 +50,27 @@ export class MenuButtonsInjector {
 	/**
 	 * Applies necessary styles to the tab bar
 	 */
-	private setupTabBarStyles(): void {
-		const tabBarEle = document.querySelector<HTMLElement>('[role="tablist"]')
-		if (tabBarEle) {
-			tabBarEle.style.position = "sticky"
-			tabBarEle.style.zIndex = "1"
-			tabBarEle.style.top = "0"
-		}
-	}
+	// private setupTabBarStyles(): void {
+	// 	const tabBarEle = document.querySelector<HTMLElement>('[role="tablist"]')
+	// 	if (tabBarEle) {
+	// 		tabBarEle.style.position = "sticky"
+	// 		tabBarEle.style.zIndex = "1"
+	// 		tabBarEle.style.top = "0"
+	// 	}
+	// }
 
 	/**
-	 * Creates a button element with the specified ID and image source
+	 * Creates a button element with the specified ID and SVG icon content
 	 */
-	private createButton(id: string, imgSrc: string): HTMLElement {
+	private createButton(id: string, iconSvg: string): HTMLElement {
 		const button = document.createElement("div")
 		button.id = id
 		button.className = "customBtns"
+		button.setAttribute("role", "button")
+		button.style.color = theme.iconColor
 		button.innerHTML = `
 			<div class="${theme.iconBgClassName}">
-				<img src="${imgSrc}">
+				${iconSvg}
 			</div>
 		`
 		return button
@@ -105,20 +108,14 @@ export class MenuButtonsInjector {
 
 		// Create and append settings button
 		if (!document.getElementById("settingsBtn")) {
-			const settingsBtn = this.createButton(
-				"settingsBtn",
-				"https://static.xx.fbcdn.net/rsrc.php/v4/yC/r/FgGUIEUfnev.png"
-			)
+			const settingsBtn = this.createButton("settingsBtn", settingsIconSvg)
 			titleBarEle.after(settingsBtn)
 			this.buttonElements.push(settingsBtn)
 		}
 
 		// Create and append feeds button
 		if (!document.getElementById("feedsBtn")) {
-			const feedsBtn = this.createButton(
-				"feedsBtn",
-				"https://static.xx.fbcdn.net/rsrc.php/v4/yB/r/Bc4BAjXDBat.png"
-			)
+			const feedsBtn = this.createButton("feedsBtn", feedsIconSvg)
 			titleBarEle.after(feedsBtn)
 			this.buttonElements.push(feedsBtn)
 		}

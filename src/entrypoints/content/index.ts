@@ -8,7 +8,6 @@ import { registerAutoReloadAfterIdle } from "@/lib/register-auto-reload-after-id
 import { runFeedsCleaner } from "@/lib/run-feeds-cleaner"
 import { SettingsMenuInjector } from "@/lib/settings-menu-injector"
 import { updateThemeConfigWhenPossible } from "@/lib/updateThemeConfigWhenPossible"
-import { injectConsole } from "@/utils/inject-console"
 import { bodyId, devMode } from "../../config"
 import { injectPwaManifest } from "@/lib/inject-pwa-manifest"
 import { removeAppInstallPrompt } from "@/lib/remove-app-install-prompt"
@@ -23,7 +22,6 @@ export default defineContentScript({
 			return
 		}
 		injectPwaManifest()
-		injectConsole("FB Mobile - Clean my feeds (Extension)")
 
 		onReadyForScripting(() => {
 			console.log("Ready for scripting")
@@ -59,7 +57,7 @@ export default defineContentScript({
 			return () => {
 				console.log("Not Ready for scripting")
 				// Cleanup code like removing dom nodes and destroying event listeners
-				aborts.forEach(abort => abort?.())
+				aborts.forEach(abort => void abort?.())
 				aborts.length = 0
 			}
 		})

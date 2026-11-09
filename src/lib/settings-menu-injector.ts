@@ -25,7 +25,7 @@ export class SettingsMenuInjector {
 <div id="${this.overlayId}" class="dialog-screen" style="color: ${theme.textColor}">
 <div class="settings-container ${theme.bgClassName}">
 <div class="settings-header">
-	<div class="settings-title">FB Mobile - Clean my feeds</div>
+	<div class="settings-title">Clean My Feeds</div>
 	<div class="settings-description">Mark filters to hide posts</div>
 </div>
 <div class="settings-items">
@@ -86,11 +86,11 @@ export class SettingsMenuInjector {
 		const { target, x, y } = event
 		if (!(target instanceof HTMLElement)) return
 
-		if (target.matches("#settingsBtn")) {
+		if (target.closest("#settingsBtn")) {
 			this.show()
-		} else if (target.matches("#closeMenuTile")) {
+		} else if (target.closest("#closeMenuTile")) {
 			this.hide()
-		} else if (target.matches("#feedsBtn")) {
+		} else if (target.closest("#feedsBtn")) {
 			document
 				.querySelector<HTMLButtonElement>('[aria-label="Facebook Menu"]')
 				?.click()
