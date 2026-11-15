@@ -1,0 +1,57 @@
+name: Publish to Stores
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-edge:
+    name: Publish to Microsoft Edge Add-ons
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Chrome zip from release
+        run: gh release download ${{ github.ref_name }} --pattern "*-chrome.zip" --dir .output
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Edge Add-ons Store
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          zip-path: .output/*-chrome.zip
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          api-key: ${{ secrets.EDGE_API_KEY }}
+
+  publish-firefox:
+    name: Publish to Firefox Add-ons (AMO)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Firefox (for manifest.json)
+        run: bun run build:firefox
+
+      - name: Download Firefox zip from release
+        run: gh release download ${{ github.ref_name }} --pattern "*-firefox.zip" --dir .output
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Firefox Add-ons Store
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          uuid: '92a2df5ed2510a2bfa4131c48c63c5d2de0ce475@webdevsk-addon'
+          xpi: .output/*-firefox.zip
+          manifest: .output/firefox-mv3/manifest.json
+          api-key: ${{ secrets.FIREFOX_API_KEY }}
+          api-secret: ${{ secrets.FIREFOX_API_SECRET }}

@@ -9,13 +9,26 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
+  release:
     name: Build & Release
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Extract version
+        id: version
+        run: |
+          PKG_VERSION=$(jq -r .version package.json)
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          echo "pkg=$PKG_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG_VERSION" >> "$GITHUB_OUTPUT"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "::error::Version mismatch — package.json is $PKG_VERSION but tag is $GITHUB_REF_NAME"
+            exit 1
+          fi
+          echo "✅ Version confirmed: $PKG_VERSION"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -31,15 +44,12 @@ jobs:
       - name: Zip Firefox extension
         run: bun run zip:firefox
 
-      - name: List output zips
-        run: ls -lh .output/*.zip
-
-      - name: Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: Release ${{ github.ref_name }}
+          name: v${{ steps.version.outputs.pkg }} – Clean My Feeds for Facebook Mobile
           body: |
-            ## 🧩 Clean My Feeds for Facebook Mobile ${{ github.ref_name }}
+            ## 🧩 Clean My Feeds for Facebook Mobile v${{ steps.version.outputs.pkg }}
 
             ### Download
 
