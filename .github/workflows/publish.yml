@@ -1,17 +1,51 @@
 name: Publish to Stores
 
 on:
-  release:
-    types: [published]
+  # Auto-trigger: fires when the Release workflow completes successfully
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+
+  # Manual trigger: run from Actions tab for any tag/version
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish (e.g. v2.1.0)'
+        required: true
+        type: string
+
+# Resolve the tag from either trigger
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.event.workflow_run.head_branch }}
 
 jobs:
+  # Guard: skip if the triggering Release workflow failed
+  check:
+    name: Check trigger
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    outputs:
+      tag: ${{ steps.resolve.outputs.tag }}
+    steps:
+      - name: Resolve tag
+        id: resolve
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ github.event.workflow_run.head_branch }}" >> "$GITHUB_OUTPUT"
+          fi
+
   publish-edge:
     name: Publish to Microsoft Edge Add-ons
     runs-on: ubuntu-latest
+    needs: check
 
     steps:
       - name: Download Chrome zip from release
-        run: gh release download ${{ github.ref_name }} --pattern "*-chrome.zip" --dir .output
+        run: gh release download ${{ needs.check.outputs.tag }} --pattern "*-chrome.zip" --dir .output --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -26,10 +60,13 @@ jobs:
   publish-firefox:
     name: Publish to Firefox Add-ons (AMO)
     runs-on: ubuntu-latest
+    needs: check
 
     steps:
       - name: Checkout tag
         uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.check.outputs.tag }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -43,7 +80,7 @@ jobs:
         run: bun run build:firefox
 
       - name: Download Firefox zip from release
-        run: gh release download ${{ github.ref_name }} --pattern "*-firefox.zip" --dir .output
+        run: gh release download ${{ needs.check.outputs.tag }} --pattern "*-firefox.zip" --dir .output --repo ${{ github.repository }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
