@@ -5,9 +5,43 @@
 
 <h2>Clean My Feeds for Facebook Mobile</h2>
 
-[![Chrome web store link](src/assets/chromewebstore-badge.png)][chromewebstore]
+<table align="center">
+  <tbody>
+    <tr>
+      <td>
+        Quetta Browser ·
+        <a href="https://play.google.com/store/apps/details?id=net.quetta.browser">Play Store</a> ·
+        <a href="https://www.quetta.net/products/android">Official APK</a>
+        </br>
+        <small>You may have to long press and download the CRX to initiate install</small>
+      </td>
+      <td rowspan="2"><a href="https://microsoftedge.microsoft.com/addons/detail/fb-mobile-clean-my-feed/nojdnhmjdlnnaeobhjngehhapjfhpjhi">
+<img width="200" src="src/assets/get-it-from-microsoft-edge.png" alt="Microsoft Edge Addon store link"/>
+</a></td>
+    </tr>
+    <tr>
+      <td>
+        Titanium Browser ·
+        <a href="https://play.google.com/store/apps/details?id=io.github.jqssun.helium">Play Store</a> ·
+        <a href="https://github.com/jqssun/android-titanium-browser/releases">GitHub Releases</a>
+      </td>
+    </tr>
+    <tr>
+      <td>Firefox Browsers</td>
+      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/fb-mobile-clean-my-feeds/">
+<img width="150" src="src/assets/get-the-addon.webp" alt="Firefox Addon store link"/>
+</a></td>
+    </tr>
+  </tbody>
+</table>
 
-[![Firefox addon link](src/assets/get-the-addon.webp)][addonsmozillaorg]
+<!-- [![Chrome web store link](src/assets/chromewebstore-badge.png)][chromewebstore] -->
+
+<!-- <a href="https://microsoftedge.microsoft.com/addons/detail/fb-mobile-clean-my-feed/nojdnhmjdlnnaeobhjngehhapjfhpjhi">
+<img height="60" src="src/assets/get-it-from-microsoft-edge.png" alt="Microsoft Edge Addon store link"/>
+</a>
+
+[![Firefox addon link](src/assets/get-the-addon.webp)][addonsmozillaorg] -->
 
 </div>
 
@@ -51,8 +85,19 @@ An added benefit of converting it into an extension is that the website can now 
 
 ### How to use
 
-1. Install a browser that supports Extensions, such as `Quetta Browser` on [Android](https://play.google.com/store/apps/details?id=net.quetta.browser) or [IOS](https://apps.apple.com/us/app/quetta-ad-free-video-browser/id6504077999), Mises, Lemur or any Firefox based browsers. Kiwi Browser is not recommended as it's abandoned and out of date.
-1. Launch your preferred browser then head to Chrome Web Store and search for "Clean My Feeds for Facebook Mobile". Alternatively, you can follow this link: [https://chromewebstore.google.com/detail/fb-mobile-clean-my-feeds/oipbhmdodiafhpfglkeomlldnbahdlfd][chromewebstore]
+#### From Addon Store (Recommended)
+
+1. Install a browser that supports Extensions from Microsoft Addon Store or Firefox Addon Store. You can refer to the table above
+1. Launch your preferred browser then head to the relevant store and install the addon
+
+#### Manual Install (No self updates)
+
+1. Download the latest zip from [GitHub Releases](https://github.com/webdevsk/fb-mobile-clean-my-feeds-ext/releases)
+1. Launch your preferred browser
+1. Navigate to Extensions menu
+1. Enable `Developer Mode` (Could be hidden inside Developer Options)
+1. Press `Install from .zip` and select the downloaded zip file
+
 1. **(Optional)** Install [uBlock Origin](https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm) extension.
    - Not required for this extension but will improve your overall browsing experience by a mile.installation: [GreasyFork](https://greasyfork.org/en/scripts/479868-fb-mobile-clean-my-feeds)
 1. Browse https://m.facebook.com/ without all the trash.
@@ -68,6 +113,8 @@ Please refer to this link to find other alternatives if my suggested combination
 
 
 ### Changelog
+- **v2.00**
+  - Complete rebranding
 - **v1.03**
   - Converted to browser extension
   - PWA implementation
@@ -181,3 +228,4 @@ This will create a production-ready build in the `.output/` directory.
 [Contribution]:CONTRIBUTION.md
 [chromewebstore]: https://chromewebstore.google.com/detail/fb-mobile-clean-my-feeds/oipbhmdodiafhpfglkeomlldnbahdlfd
 [addonsmozillaorg]: https://addons.mozilla.org/en-US/firefox/addon/fb-mobile-clean-my-feeds/
+[microsoftedgeaddon]: https://microsoftedge.microsoft.com/addons/detail/fb-mobile-clean-my-feed/nojdnhmjdlnnaeobhjngehhapjfhpjhi
