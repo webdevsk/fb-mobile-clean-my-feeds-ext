@@ -84,11 +84,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Resolve Firefox zip path
+        id: zip
+        run: echo "path=$(ls .output/*-firefox.zip)" >> "$GITHUB_OUTPUT"
+
       - name: Publish to Firefox Add-ons Store
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: '92a2df5ed2510a2bfa4131c48c63c5d2de0ce475@webdevsk-addon'
-          xpi: .output/*-firefox.zip
+          xpi: ${{ steps.zip.outputs.path }}
           manifest: .output/firefox-mv3/manifest.json
           api-key: ${{ secrets.FIREFOX_API_KEY }}
           api-secret: ${{ secrets.FIREFOX_API_SECRET }}
