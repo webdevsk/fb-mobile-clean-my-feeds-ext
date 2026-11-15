@@ -28,7 +28,7 @@
     </tr>
     <tr>
       <td>Firefox Browsers</td>
-      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/fb-mobile-clean-my-feeds/">
+      <td><a href="https://addons.mozilla.org/en-US/firefox/addon/clean-my-feeds-for-fb-mobile/">
 <img width="150" src="src/assets/get-the-addon.webp" alt="Firefox Addon store link"/>
 </a></td>
     </tr>
@@ -113,7 +113,9 @@ Please refer to this link to find other alternatives if my suggested combination
 
 
 ### Changelog
-- **v2.00**
+- **v2.1.0**
+  - Added "Add friend" filter
+- **v2.0.0**
   - Complete rebranding
 - **v1.03**
   - Converted to browser extension
