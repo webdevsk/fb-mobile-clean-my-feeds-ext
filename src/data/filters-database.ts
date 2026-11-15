@@ -35,6 +35,12 @@ export const filtersDatabase: Record<string, FiltersDatabaseItem> = {
 		icon: "󰎍",
 		keywordsDB: keywordsPerLanguage.peopleYouMayKnow,
 	},
+	addFriend: {
+		title: "Add friend",
+		description: "Removes Add friend posts",
+		icon: "󰎍",
+		keywordsDB: keywordsPerLanguage.addFriend,
+	},
 	uncategorized: {
 		title: "Follow/Join",
 		description: "Removes suggested pages with join/follow link",

@@ -1,6 +1,6 @@
 {
 	"name": "clean-my-feeds-for-facebook-mobile",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"devDependencies": {
 		"typescript": "^5.9.2",
 		"wxt": "^0.20.6",

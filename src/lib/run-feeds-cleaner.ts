@@ -7,7 +7,7 @@ import {
 	filterTitlePerKeywordIndex,
 	filtersDatabase,
 } from "@/data/filters-database"
-import { Keyword } from "@/data/keywords-per-language"
+import type { Keyword } from "@/data/keywords-per-language"
 import { BlockCounter } from "@/lib/block-counter"
 import { getGlobalFilters, getOwnLangFilters } from "./get-own-language-filters"
 import { purgeElement } from "./purge-element"

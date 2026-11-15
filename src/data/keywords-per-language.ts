@@ -12,14 +12,14 @@ export const placeholderMessage = {
 	en: "Removed",
 	bn: "বাতিল",
 }
-export const keywordsPerLanguage: KeywordsPerLanguage = {
+export const keywordsPerLanguage = {
 	suggested: {
 		"en-US": "Suggested",
 		en: "Suggested",
 		bn: "আপনার জন্য প্রস্তাবিত",
 	},
 	sponsored: {
-		"en-US": ["Sponsored", /^Ad$/],
+		"en-US": ["Sponsored", /^\s*Ad\s*$/],
 		en: "Sponsored",
 		bn: "স্পনসর্ড",
 	},
@@ -36,4 +36,8 @@ export const keywordsPerLanguage: KeywordsPerLanguage = {
 		"en-US": "Reels",
 		en: "Reels",
 	},
-}
+	addFriend: {
+		"en-US": "Add friend",
+		en: "Add friend",
+	},
+} satisfies KeywordsPerLanguage
