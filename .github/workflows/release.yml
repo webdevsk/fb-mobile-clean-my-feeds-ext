@@ -12,6 +12,8 @@ jobs:
   build-and-release:
     name: Build & Release
     runs-on: ubuntu-latest
+    outputs:
+      chrome-zip: ${{ steps.find-zips.outputs.chrome }}
 
     steps:
       - name: Checkout
@@ -31,8 +33,19 @@ jobs:
       - name: Zip Firefox extension
         run: bun run zip:firefox
 
-      - name: List output zips
-        run: ls -lh .output/*.zip
+      - name: Find zip paths
+        id: find-zips
+        run: |
+          CHROME_ZIP=$(ls .output/*-chrome.zip)
+          echo "chrome=$CHROME_ZIP" >> "$GITHUB_OUTPUT"
+          ls -lh .output/*.zip
+
+      - name: Upload zips as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-zips
+          path: .output/*.zip
+          retention-days: 1
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -47,6 +60,64 @@ jobs:
             | --- | --- |
             | Chrome / Edge (Chromium) | `*-chrome.zip` |
             | Firefox | `*-firefox.zip` |
+
+            > [!NOTE]
+            > The `*-sources.zip` file is included with the Firefox release as required by Mozilla AMO policy.
           files: .output/*.zip
           fail_on_unmatched_files: true
           generate_release_notes: true
+
+  publish-edge:
+    name: Publish to Microsoft Edge Add-ons
+    runs-on: ubuntu-latest
+    needs: build-and-release
+
+    steps:
+      - name: Download extension zips
+        uses: actions/download-artifact@v4
+        with:
+          name: extension-zips
+          path: .output
+
+      - name: Publish to Edge Add-ons Store
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.EDGE_PRODUCT_ID }}
+          zip-path: .output/*-chrome.zip
+          client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          api-key: ${{ secrets.EDGE_API_KEY }}
+
+  publish-firefox:
+    name: Publish to Firefox Add-ons (AMO)
+    runs-on: ubuntu-latest
+    needs: build-and-release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build Firefox extension (for manifest.json)
+        run: bun run build:firefox
+
+      - name: Download Firefox zip
+        uses: actions/download-artifact@v4
+        with:
+          name: extension-zips
+          path: .output
+
+      - name: Publish to Firefox Add-ons Store
+        uses: trmcnvn/firefox-addon@v1
+        with:
+          uuid: '92a2df5ed2510a2bfa4131c48c63c5d2de0ce475@webdevsk-addon'
+          xpi: .output/*-firefox.zip
+          manifest: .output/firefox-mv3/manifest.json
+          api-key: ${{ secrets.FIREFOX_API_KEY }}
+          api-secret: ${{ secrets.FIREFOX_API_SECRET }}
